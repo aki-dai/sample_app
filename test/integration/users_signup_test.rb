@@ -17,7 +17,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template 'users/new'
     assert_select 'div#error_explanation'
 
-    assert_difference 'User.count' do
+    assert_difference 'User.count', 1 do
       post signup_path, params: { user: { name: "Rails",
                                           email: "user@valid.com",
                                           password:              "qwerty",
@@ -29,5 +29,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
     #assert_select 'div.alert-success'
     assert_not flash.empty?
+    assert is_logged_in?
   end
 end
